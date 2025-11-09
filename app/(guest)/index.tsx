@@ -6,11 +6,10 @@ import { Text, View } from "react-native";
 
 const LoginScreen = () => {
   const { mutateAsync, isPending } = useGoogleSignIn();
-
+  
   const handleGoogleSignIn = async () => {
     const { user } = await mutateAsync();
     console.log("Signed in:", user?.email);
-    useAuthStore.getState().setLoginStatus(true);
   };
 
   return (

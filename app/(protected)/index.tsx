@@ -6,10 +6,12 @@ import { View, Text } from "react-native";
 
 const HomeScreen = () => {
   const { mutateAsync: signOut } = useGoogleSignOut();
+  const clearToken = useAuthStore((state) => state.clearToken);
 
   const handleSignOut = async () => {
-    await signOut();
-    useAuthStore.getState().clearToken();
+    await signOut().finally(() => {
+      clearToken();
+    })
   };
 
   return (

@@ -24,7 +24,12 @@ export function configureGoogle() {
 
 export async function signInWithGoogle() {
   configureGoogle();
-  await GoogleSignin.hasPlayServices();
+  try {
+    await GoogleSignin.hasPlayServices();
+  } catch (err) {
+    const error = new Error("Google Play Services are required for sign-in.");
+    throw error;
+  }
 
   const response = await GoogleSignin.signIn();
   if (!isSuccessResponse(response)) {
