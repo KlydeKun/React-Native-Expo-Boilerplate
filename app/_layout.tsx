@@ -10,13 +10,9 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
 import { Slot, Stack, usePathname } from "expo-router";
-import { Fab, FabIcon } from "@/components/ui/fab";
-import { MoonIcon, SunIcon } from "@/components/ui/icon";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ROUTES } from "@/src/feature/navigation/routes";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-
 export { ErrorBoundary } from "expo-router";
 
 export const queryClient = new QueryClient({
@@ -72,15 +68,14 @@ function RootLayoutNav() {
   const [colorMode, setColorMode] = useState<"light" | "dark">("light");
 
   return (
-    <SafeAreaProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <QueryClientProvider client={queryClient}>
-          <GluestackUIProvider mode={colorMode}>
-            <ThemeProvider
-              value={colorMode === "dark" ? DarkTheme : DefaultTheme}
-            >
-              <StackLayout />
-              {/* {pathname === "/" && (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <QueryClientProvider client={queryClient}>
+        <GluestackUIProvider mode={colorMode}>
+          <ThemeProvider
+            value={colorMode === "dark" ? DarkTheme : DefaultTheme}
+          >
+            <StackLayout />
+            {/* {pathname === "/" && (
                 <Fab
                   onPress={() =>
                     setColorMode(colorMode === "dark" ? "light" : "dark")
@@ -91,10 +86,9 @@ function RootLayoutNav() {
                   <FabIcon as={colorMode === "dark" ? MoonIcon : SunIcon} />
                 </Fab>
               )} */}
-            </ThemeProvider>
-          </GluestackUIProvider>
-        </QueryClientProvider>
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+          </ThemeProvider>
+        </GluestackUIProvider>
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }

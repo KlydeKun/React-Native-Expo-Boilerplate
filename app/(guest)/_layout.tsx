@@ -1,9 +1,10 @@
 import React from 'react'
 import { Redirect, Stack } from 'expo-router'
 import { ROUTES } from '@/src/feature/navigation/routes'
+import { useAuth } from '@/hooks/auth/useAuth'
 
 const GuestLayout = () => {
-    const isAuthenticated = false; // Replace with your actual auth state
+    const { isAuthenticated } = useAuth();
     
     if (isAuthenticated) {
         return <Redirect href={ROUTES.PROTECTED as any} />;
